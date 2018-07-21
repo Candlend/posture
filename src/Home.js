@@ -1,27 +1,23 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
 import Bottom from './Bottom';
 import Header from "./Header";
+import Content from "./Content";
 import Camera from "./Camera"
 
 export default class Home extends React.Component {
 	state = {
-		mode: "app"
+		appMode: true,
+		page: "workout",
+		prePage: null
 	};
 
 	render() {
-		if (this.state.mode === "app") {
+		if (this.state.appMode) {
 			return (
 				<div>
 					<Header />
-
-					<Button variant="raised" color="primary" onClick={() => {
-						this.setState({mode: "camera"});
-					}}>
-						Hello World!
-					</Button>
-
-					<Bottom />
+					<Content home={this} page={this.page}/>
+					<Bottom home={this} />
 				</div>
 			);
 		} else {

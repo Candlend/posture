@@ -16,7 +16,6 @@ export default class Bottom extends React.Component {
 	render() {
 		return (
 			<BottomNavigation
-			 	position="static"
 				value={this.state.selected}
 				onChange={this.handleChange}
 				showLabels
