@@ -2,6 +2,12 @@
 
 Entrance of this app: src/index.js
 
+# Setup
+
+```
+npm install
+```
+
 # How to Run
 
 ```
