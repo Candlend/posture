@@ -4,7 +4,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import AccountCircle from '@material-ui/icons/AccountCircle';
+import SearchIcon from '@material-ui/icons/Search';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 
@@ -24,23 +24,16 @@ class Header extends React.Component {
 					<AppBarMenu
 						id="0"
 						menuItems={[
+							"Settings",
 							"Feedback",
 							"About"
 						]}
+						icon={<MenuIcon />}
 					/>
 					<Typography variant="title" color="inherit" style={style.flex}>
 						Posture
 					</Typography>
-					<AppBarMenu
-						id="1"
-						menuItems={[
-							"Profile",
-							"Notification",
-							"Settings",
-							"Favorites"
-						]}
-						icon={<AccountCircle />}
-					/>
+					<SearchIcon />
 				</Toolbar>
 			</AppBar>
 		);
@@ -75,7 +68,7 @@ class AppBarMenu extends React.Component {
 					onClick={this.handleMenu}
 					color="inherit"
 				>
-					<MenuIcon />
+					{this.props.icon}
 				</IconButton>
 				<Menu
 					id={"menu-appbar" + this.props.id}
