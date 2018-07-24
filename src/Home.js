@@ -2,7 +2,7 @@ import React from 'react';
 import Bottom from './Bottom';
 import Header from "./Header";
 import Content from "./Content";
-import Camera from "./Camera"
+import Camera from "./Camera";
 
 export default class Home extends React.Component {
 	state = {
@@ -22,7 +22,7 @@ export default class Home extends React.Component {
 			);
 		} else {
 			return (
-				<Camera />
+				<Camera home={this} />
 			);
 		}
 	}

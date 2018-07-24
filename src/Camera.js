@@ -17,14 +17,21 @@ const style = {
 		margin: 10
 	}
 };
+
 export default class Camera extends React.Component {
+	state = {
+		previewUrl: ""
+	};
+
 	constructor() {
 		super();
-    this.turnon = false;
-  }
-  setRef = (webcam) => {
-    this.webcam = webcam;
-  }
+    	this.turnon = false;
+  	}
+	
+	setRef = (webcam) => {
+		this.webcam = webcam;
+	}
+
 	start = () => {
 		if (this.turnon === true) return;
 		this.turnon = true;
@@ -34,14 +41,16 @@ export default class Camera extends React.Component {
 		//console.log(this.cap);
 	}
 
-  capture = () => {
+	capture = () => {
 		const imageSrc = this.webcam.getScreenshot();
-		console.log(imageSrc);
-		fetch("http://10.20.199.201:8000", {
+		// console.log(imageSrc);
+		fetch("http://139.219.129.146:8081", {
 			body: imageSrc,
 			method: 'post',
-		})
-  };
+		}).then((res) => {
+			console.log(res.text());
+		});
+	};
 
 	end = () => {
 		if (this.turnon === false) return;
@@ -50,45 +59,50 @@ export default class Camera extends React.Component {
 		//console.log(this.cap);
 		clearInterval(this.cap);
 	}
-  render() {
-    const videoConstraints = {
-      width: 1280,
-      height: 1280,
-      facingMode: 'user',
-    };
+	render() {
+		const videoConstraints = {
+		  width: 1280,
+		  height: 1280,
+		  facingMode: 'user',
+		};
 
-    return (
-      <div style={{width: "100vw", height: "100vh", background: "#000000"}}>
-        <Webcam
-          audio={false}
-          height={window.screen.height}
-          ref={this.setRef}
-          screenshotFormat="image/jpeg"
-          width={window.screen.width}
-          videoConstraints={videoConstraints}
-        />
+		return (
+			<div style={{width: "100vw", height: "100vh", background: "#000000"}}>
+				<img src={this.state.previewUrl} style={{position: "absolute", float: "right"}} />
+				<Webcam
+				audio={false}
+				height={window.screen.height}
+				ref={this.setRef}
+				screenshotFormat="image/jpeg"
+				width={window.screen.width}
+				videoConstraints={videoConstraints}
+				/>
 				<div>
-				<Grid
-				container
-				justify="center"
-				direction="row"
-				alignItems="center"
-				style={style.bottom}
-			>
-				<Button onClick={this.start} variant="fab" color="primary" aria-label="Start" style={style.iconButtons}>
-					<PlayArrowIcon />
-				</Button>
-				<Button onClick={this.end} variant="fab" color="secondary" aria-label="Stop" style={style.iconButtons}>
-					<StopIcon />
-				</Button>
-				<Button variant="extendedFab" aria-label="Delete" style={style.iconButtons}>
-					<ArrowBackIcon />
-					Back
-				</Button>
-			</Grid>
+					<Grid
+					container
+					justify="center"
+					direction="row"
+					alignItems="center"
+					style={style.bottom}
+					>
+						<Button onClick={this.start} variant="fab" color="primary" aria-label="Start" style={style.iconButtons}>
+							<PlayArrowIcon />
+						</Button>
+						<Button onClick={this.end} variant="fab" color="secondary" aria-label="Stop" style={style.iconButtons}>
+							<StopIcon />
+						</Button>
+						<Button
+							variant="extendedFab"
+							aria-label="Delete"
+							style={style.iconButtons}
+						>
+							<ArrowBackIcon />
+							Back
+						</Button>
+					</Grid>
 				</div>
 			</div>
-    );
+		);
   }
 }
 

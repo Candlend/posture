@@ -1,6 +1,10 @@
 import React from 'react';
 import Workout from "./Workout";
 import WorkoutItem from "./WorkoutItem";
+import Notification from "./Notification";
+import Moment from "./Moment";
+import Account from "./Account";
+
 
 export default class Content extends React.Component {
 	state = {
@@ -8,14 +12,6 @@ export default class Content extends React.Component {
 	};
 
 	render() {	
-		// return (
-		// 	<Button variant="raised" color="primary" onClick={() => {
-		// 		this.props.home.setState({appMode: false});
-		// 	}}>
-		// 		Hello World!
-		// 	</Button>
-		// );
-
 		const currPage = this.props.home.state.page;
 	
 		if (currPage === "workout") {
@@ -25,6 +21,18 @@ export default class Content extends React.Component {
 		} else if (currPage === "workout_item") {
 			return (
 				<WorkoutItem home={this.props.home} itemId={this.state.workoutItemId} />
+			);
+		} else if (currPage === "notification") {
+			return (
+				<Notification />
+			);
+		} else if (currPage === "moments") {
+			return (
+				<Moment />
+			);
+		} else if (currPage === "account") {
+			return (
+				<Account />
 			);
 		}
 	}

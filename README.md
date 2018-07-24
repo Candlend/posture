@@ -1,5 +1,7 @@
 # Posture
 
+# Won the second place of 2018 hackShanghai
+
 Entrance of this app: src/index.js
 
 # Setup

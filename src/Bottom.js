@@ -34,5 +34,15 @@ export default class Bottom extends React.Component {
 		this.setState({
 			selected: v
 		});
+		
+		if (v === 0) {
+			this.props.home.setState({page: "workout"});
+		} else if (v === 1) {
+			this.props.home.setState({page: "moments"});
+		} else if (v === 2) {
+			this.props.home.setState({page: "notification"});
+		} else if (v === 3) {
+			this.props.home.setState({page: "account"});
+		}
 	}
 }
